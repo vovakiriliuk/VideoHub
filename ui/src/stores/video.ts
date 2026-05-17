@@ -23,7 +23,7 @@ interface VideoState {
   error: string | null;
 }
 
-const API_URL = 'http://localhost:5000/videos';
+const API_URL = `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/videos`;
 
 export const useVideoStore = defineStore('video', {
   state: (): VideoState => ({
