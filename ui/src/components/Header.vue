@@ -1,15 +1,11 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import { useAuthStore } from '../stores/auth';
 import { useRouter } from 'vue-router';
-import { useWidth } from '../hooks/useWidth';
 
 const authStore = useAuthStore();
 const router = useRouter();
-const { width } = useWidth();
 const menuOpen = ref(false);
-
-const isMobile = computed(() => width.value <= 768);
 
 const handleLogout = () => {
   authStore.logout();
@@ -35,12 +31,7 @@ const closeMenu = () => {
       </router-link>
     </div>
 
-    <button 
-      class="burger" 
-      @click="toggleMenu" 
-      :class="{ open: menuOpen }"
-      aria-label="Toggle menu"
-    >
+    <button class="burger" @click="toggleMenu" :class="{ open: menuOpen }" aria-label="Toggle menu">
       <span></span>
       <span></span>
       <span></span>
@@ -53,18 +44,18 @@ const closeMenu = () => {
             <i class="fas fa-compass"></i> <span>Browse</span>
           </router-link>
         </li>
-        
+
         <template v-if="authStore.isAuthenticated">
           <li class="nav-item">
             <router-link to="/my-videos" class="nav-link" @click="closeMenu">
               <i class="fas fa-video"></i> <span>My Library</span>
             </router-link>
           </li>
-          
+
           <li class="nav-item user-item">
             <div class="user-section">
               <span class="user-greeting">
-                 <i class="fas fa-user-circle"></i> {{ authStore.user?.username }}
+                <i class="fas fa-user-circle"></i> {{ authStore.user?.username }}
               </span>
               <button @click="handleLogout" class="btn-logout" title="Logout">
                 <i class="fas fa-sign-out-alt"></i>
@@ -73,13 +64,15 @@ const closeMenu = () => {
             </div>
           </li>
         </template>
-        
+
         <template v-else>
           <li class="nav-item">
             <router-link to="/login" class="nav-link" @click="closeMenu">Login</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/register" class="btn-register" @click="closeMenu">Get Started</router-link>
+            <router-link to="/register" class="btn-register" @click="closeMenu"
+              >Get Started</router-link
+            >
           </li>
         </template>
       </ul>
@@ -119,9 +112,15 @@ const closeMenu = () => {
   gap: 0.5rem;
 }
 
-.logo-icon { color: var(--accent-green); }
-.logo-text { color: var(--text-primary); }
-.logo-accent { color: var(--accent-green); }
+.logo-icon {
+  color: var(--accent-green);
+}
+.logo-text {
+  color: var(--text-primary);
+}
+.logo-accent {
+  color: var(--accent-green);
+}
 
 nav {
   display: flex;
@@ -151,7 +150,8 @@ nav {
   font-size: 0.95rem;
 }
 
-.nav-link:hover, .router-link-active {
+.nav-link:hover,
+.router-link-active {
   color: var(--accent-green);
 }
 
@@ -231,15 +231,26 @@ nav {
   height: 2px;
   background: var(--accent-green);
   border-radius: 2px;
-  transition: transform 0.25s ease, opacity 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
   transform-origin: center;
 }
 
-.burger:hover { border-color: var(--accent-green); }
+.burger:hover {
+  border-color: var(--accent-green);
+}
 
-.burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-.burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.burger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.burger.open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.burger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
 
 @media (max-width: 768px) {
   .header-content {
@@ -248,7 +259,9 @@ nav {
     position: relative;
   }
 
-  .burger { display: flex; }
+  .burger {
+    display: flex;
+  }
 
   nav {
     position: absolute;
@@ -263,7 +276,10 @@ nav {
     opacity: 0;
     pointer-events: none;
     overflow: hidden;
-    transition: max-height 0.3s ease, opacity 0.2s ease, padding 0.3s ease;
+    transition:
+      max-height 0.3s ease,
+      opacity 0.2s ease,
+      padding 0.3s ease;
     display: block;
   }
 
@@ -309,7 +325,10 @@ nav {
     height: 50px;
   }
 
-  .mobile-only-text { display: inline; margin-left: 10px; }
+  .mobile-only-text {
+    display: inline;
+    margin-left: 10px;
+  }
 
   .btn-register {
     width: 100%;
